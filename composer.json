@@ -1,0 +1,43 @@
+{
+    "name": "bymayo/follow",
+    "description": "Allow users to connect with each other",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "follow"
+    ],
+    "support": {
+        "docs": "https://github.com/bymayo/follow/blob/master/README.md",
+        "issues": "https://github.com/bymayo/follow/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ByMayo",
+            "homepage": "https://bymayo.co.uk"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "bymayo\\follow\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Follow",
+        "handle": "follow",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/bymayo/follow/master/CHANGELOG.md",
+        "components": {
+            "followService": "bymayo\\follow\\services\\FollowService"
+        },
+        "class": "bymayo\\follow\\Follow"
+    }
+}
