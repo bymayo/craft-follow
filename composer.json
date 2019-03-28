@@ -1,6 +1,6 @@
 {
     "name": "bymayo/follow",
-    "description": "Allow users to connect with each other",
+    "description": "Let users follow other users and elements (Categories, Tags etc) to generate lists & feeds.",
     "type": "craft-plugin",
     "version": "1.0.0",
     "keywords": [
@@ -11,8 +11,8 @@
         "follow"
     ],
     "support": {
-        "docs": "https://github.com/bymayo/follow/blob/master/README.md",
-        "issues": "https://github.com/bymayo/follow/issues"
+        "docs": "https://github.com/bymayo/craft-follow/blob/master/README.md",
+        "issues": "https://github.com/bymayo/craft-follow/issues"
     },
     "license": "MIT",
     "authors": [
@@ -34,7 +34,7 @@
         "handle": "follow",
         "hasCpSettings": true,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/bymayo/follow/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/bymayo/craft-follow/master/CHANGELOG.md",
         "components": {
             "followService": "bymayo\\follow\\services\\FollowService"
         },
