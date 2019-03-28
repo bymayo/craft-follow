@@ -43,11 +43,11 @@ You update these settings by creating a `follow.php` file in your projects `conf
 
 ## Templating
 
-- Follow URL
-- Unfollow URL
-- Check
-- Following
-- Followers
+- [Follow URL](#follow-url)
+- [Unfollow URL](#unfollow-url)
+- [Check](#check)
+- [Following](#following)
+- [Followers](#followers)
 
 ### Follow URL
 To allow the `currentUser` to follow an element you can use the `followUrl` method to output the correct URL. You simply pass an element ID to it, whether this is a `user`, `category` or `tag` ID is up to you:
