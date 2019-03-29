@@ -123,11 +123,11 @@ To see what users are following a particular element, you can use the `following
 {% endfor %}
 ```
 
-## Examples
+## Examples (Soon)
 Below are a few example files to create more complex features. E.g. If you want to generate a 'Feed' of entries a user is following, or get following / follower counts etc. 
 
-- User Followers
-- User Following
+- A Users Followers list
+- A Users Following list
 - Followers Count / Following Count
 - Follow Categories with Entries Feed
 - Follow Tags with Entries Feed
