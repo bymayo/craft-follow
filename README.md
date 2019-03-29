@@ -126,14 +126,15 @@ To see what users are following a particular element, you can use the `following
 ## Examples
 I've put together a few example files to create more complex features. E.g. If you want to generate a 'Feed' of entries a user is following, or get following / follower counts etc.
 
-- User Followers
+- Users Followers
 - User Following
+- Followers / Following Count
+- Follow Categories
+- Follow Tags
+- Dashboard Entries Feed
 - Commerce 
-- Entries Feed
-- Wishlist
-- Like / Unlike
-- Followers Count
-- Following Count
+- Basic Wishlist
+- Basic Like / Unlike
 
 ## Support
 
