@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/bymayo/craft-strava-sync/master/resources/icon.png" width="70">
+<img src="https://raw.githubusercontent.com/bymayo/craft-follow/master/resources/icon.png" width="70">
 
 # Follow Plugin for Craft CMS 3.x
 
@@ -124,17 +124,14 @@ To see what users are following a particular element, you can use the `following
 ```
 
 ## Examples
-I've put together a few example files to create more complex features. E.g. If you want to generate a 'Feed' of entries a user is following, or get following / follower counts etc.
+Below are a few example files to create more complex features. E.g. If you want to generate a 'Feed' of entries a user is following, or get following / follower counts etc. 
 
-- Users Followers
+- User Followers
 - User Following
-- Followers / Following Count
-- Follow Categories
-- Follow Tags
-- Dashboard Entries Feed
-- Commerce 
-- Basic Wishlist
-- Basic Like / Unlike
+- Followers Count / Following Count
+- Follow Categories with Entries Feed
+- Follow Tags with Entries Feed
+- Commerce
 
 ## Support
 
