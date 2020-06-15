@@ -11,6 +11,8 @@ Follow is a Craft CMS plugin that lets users follow elements within Craft. E.g. 
 - Follow Craft and other plugin elements (E.g. Users, Categories, Tags)
 - Generate a 'Following' and 'Followers' list for a user.
 
+## Documentation
+
 __[View Documentation](https://plugins.bymayo.co.uk/follow/)__
 
 ## Support
