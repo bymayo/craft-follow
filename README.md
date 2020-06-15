@@ -4,7 +4,7 @@
 
 Follow is a Craft CMS plugin that lets users follow elements within Craft. E.g. Users can follow other users, and create a 'Following List', or follow categories to then generate a bespoke entries feed.
 
-🛒 [View on the Plugin Store](https://plugins.craftcms.com/strava-sync)<br>
+🛒 [View on the Plugin Store](https://plugins.craftcms.com/follow)<br>
 
 ## Features
 
