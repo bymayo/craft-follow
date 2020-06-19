@@ -1,5 +1,9 @@
 # Follow Changelog
 
+## 1.0.3 - 2020-06-19
+### Added
+- `followingTotal` and `followersTotal` method
+
 ## 1.0.2 - 2020-06-19
 ### Changed
 - Updated documentation URL
@@ -7,8 +11,6 @@
 
 ### Added
 - `following` method can now be output as a string or array. This works well when trying to get a count for amount of followers & following.
-
-### Updated
 
 ## 1.0.1 - 2019-03-27
 ### Changed

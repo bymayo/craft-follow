@@ -46,7 +46,7 @@ class FollowVariable
 
    public function followersTotal($elementId = null)
    {
-      return Follow::getInstance()->elementService->followingTotal($elementId);
+      return Follow::getInstance()->elementService->followersTotal($elementId);
    }
 
 }

@@ -36,13 +36,18 @@ class ElementService extends Component
       // |length could be used
    }
 
-   public function followingTotal()
+   public function followingTotal($params)
    {
+
+      $params['output'] = 'array';
+      return count($this->following($params));
 
    }
 
-   public function followerTotal()
+   public function followersTotal($elementId)
    {
+
+      return count($this->followers($elementId, 'array'));
       
    }
 
@@ -76,10 +81,11 @@ class ElementService extends Component
 
    }
 
-   public function followers($elementId)
+   public function followers($elementId, $output = null)
    {
 
       $elementId = $elementId ?? Craft::$app->getUser()->getIdentity()->id;
+      $output = isset($output) ? $output: 'string';
 
       try {
 
@@ -100,7 +106,7 @@ class ElementService extends Component
             array_push($results, $result['userId']);
          }
 
-         return $this->arrayToString($queryResult, 'userId');
+         return $output == 'array' ? $queryResult : $this->arrayToString($queryResult, 'userId');
 
       }
       catch (Exception $e) {
