@@ -29,11 +29,29 @@ class ElementService extends Component
 
    }
 
+   public function outputType($type)
+   {
+      // @TODO: Allow the output to be string, array, user, categories, entries. 
+      // This would mean we wouldn't need the followingTotal and followerTotal as 
+      // |length could be used
+   }
+
+   public function followingTotal()
+   {
+
+   }
+
+   public function followerTotal()
+   {
+      
+   }
+
     public function following($params)
     {
 
       $user = isset($params['userId']) ? Craft::$app->users->getUserById($params['userId']) : Craft::$app->getUser()->getIdentity();
       $elementClass = isset($params['elementClass']) ? $params['elementClass'] : 'craft\elements\User';
+      $output = isset($params['output']) ? $params['output'] : 'string';
 
       try {
 
@@ -49,7 +67,7 @@ class ElementService extends Component
          $command = $query->createCommand();
          $queryResult = $command->queryAll();
 
-         return $this->arrayToString($queryResult, 'elementId');
+         return $output == 'array' ? $queryResult : $this->arrayToString($queryResult, 'elementId');
 
       }
       catch (Exception $e) {
@@ -91,15 +109,15 @@ class ElementService extends Component
 
    }
 
-    public function check($elementId, $userId)
+    public function check($params)
     {
 
-      $user = is_null($userId) ? Craft::$app->getUser()->getIdentity() : Craft::$app->users->getUserById($userId);
+      $user = isset($params['userId']) ? Craft::$app->users->getUserById($params['userId']) : Craft::$app->getUser()->getIdentity();
 
       $elementRecord = ElementsRecord::findOne(
           [
             'userId' => $user->id,
-            'elementId' => $elementId
+            'elementId' => $params['elementId']
           ]
       );
 

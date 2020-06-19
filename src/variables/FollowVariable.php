@@ -24,22 +24,29 @@ class FollowVariable
       return UrlHelper::actionUrl('follow/element/unfollow', array('elementId' => $elementId));
    }
 
-   public function check($elementId, $userId = null)
+   public function check($params = null)
    {
-      // Returns BOOL / True / False
-      return Follow::getInstance()->elementService->check($elementId, $userId);
+      return Follow::getInstance()->elementService->check($params);
    }
 
    public function following($params = null)
    {
-      // Returns list of ID's
       return Follow::getInstance()->elementService->following($params);
    }
 
    public function followers($elementId = null)
    {
-      // Returns list of ID's
       return Follow::getInstance()->elementService->followers($elementId);
+   }
+
+   public function followingTotal($params = null)
+   {
+      return Follow::getInstance()->elementService->followingTotal($params);
+   }
+
+   public function followersTotal($elementId = null)
+   {
+      return Follow::getInstance()->elementService->followingTotal($elementId);
    }
 
 }
