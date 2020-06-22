@@ -16,6 +16,7 @@
 
 return [
    '*' => [
+      'userRequests' => false,
       'allowedElementClasses' => [
          'craft\elements\User',
          'craft\elements\Tag',

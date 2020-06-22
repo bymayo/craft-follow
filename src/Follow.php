@@ -26,7 +26,7 @@ class Follow extends Plugin
     // Public Properties
     // =========================================================================
 
-    public $schemaVersion = '1.0.0';
+    public $schemaVersion = '1.0.1';
 
     public $hasCpSettings = false;
 
@@ -40,7 +40,9 @@ class Follow extends Plugin
         self::$plugin = $this;
 
         $this->setComponents([
-            'elementService' => \bymayo\follow\services\ElementService::class
+            'elementService' => \bymayo\follow\services\ElementService::class,
+            'requestService' => \bymayo\follow\services\RequestService::class,
+            'notificationService' => \bymayo\follow\services\NotificationService::class
          ]);
 
         Event::on(
