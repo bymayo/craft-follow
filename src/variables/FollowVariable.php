@@ -14,6 +14,10 @@ class FollowVariable
    // Public Methods
    // =========================================================================
 
+   /*
+      Elements
+   */
+
    public function followUrl($elementId)
    {
       return UrlHelper::actionUrl('follow/element/follow', array('elementId' => $elementId));
@@ -48,5 +52,9 @@ class FollowVariable
    {
       return Follow::getInstance()->elementService->followersTotal($elementId);
    }
+
+   /*
+      Requests
+   */
 
 }

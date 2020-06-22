@@ -13,11 +13,13 @@ class Settings extends Model
     // Public Properties
     // =========================================================================
 
+    public $userRequests = false;
+
     public $allowedElementClasses = array(
       'craft\elements\User',
       'craft\elements\Tag',
       'craft\elements\Category'
-   );
+    );
 
     // Public Methods
     // =========================================================================
@@ -25,7 +27,8 @@ class Settings extends Model
     public function rules()
     {
         return [
-            [['allowedElementClasses'], 'array']
+            [['allowedElementClasses'], 'array'],
+            [['userRequests'], 'bool']
         ];
     }
 
