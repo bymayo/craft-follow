@@ -28,6 +28,8 @@ class Follow extends Plugin
 
     public $schemaVersion = '1.0.0';
 
+    public $hasCpSettings = false;
+
     // Public Methods
     // =========================================================================
 
@@ -47,15 +49,6 @@ class Follow extends Plugin
             function (Event $event) {
                 $variable = $event->sender;
                 $variable->set('follow', FollowVariable::class);
-            }
-        );
-
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                }
             }
         );
 

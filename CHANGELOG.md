@@ -1,5 +1,9 @@
 # Follow Changelog
 
+## 1.0.4 - 2020-06-22
+### Removed
+- Settings page is no longer available through the CP. Use `config/follow.php` to set settings per environment
+
 ## 1.0.3 - 2020-06-19
 ### Added
 - `followingTotal` and `followersTotal` method
