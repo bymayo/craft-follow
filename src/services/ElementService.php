@@ -115,16 +115,76 @@ class ElementService extends Component
 
    }
 
-    public function check($params)
-    {
+   public function createFollow($elementId)
+   {
+
+      $elementClass = Craft::$app->getElements()->getElementTypeById($elementId);
+
+      if (!$this->check(array('elementId' => $elementId)) && in_array($elementClass, Follow::$plugin->getSettings()->allowedElementClasses))
+      {
+
+         $elementRecord = new ElementsRecord();
+
+         $elementRecord->userId = Craft::$app->getUser()->getIdentity()->id;
+         $elementRecord->elementId = $elementId;
+         $elementRecord->elementClass = $elementClass;
+         $elementRecord->siteId = Craft::$app->getSites()->currentSite->id;
+
+         $db = Craft::$app->getDb();
+         $transaction = $db->beginTransaction();
+
+         try {
+
+            $success = $elementRecord->save(false);
+
+            if ($success) {
+               $transaction->commit();
+            }
+
+         }
+         catch (\Throwable $e) {
+
+            $transaction->rollBack();
+            throw $e;
+
+         }
+
+         return true;
+
+      }
+
+   }
+
+   public function deleteFollow($elementId)
+   {
+
+      if ($this->check(array('elementId' => $elementId)))
+      {
+
+         $elementRecord = ElementsRecord::findOne(
+            [
+               'userId' => Craft::$app->getUser()->getIdentity()->id,
+               'elementId' => $elementId
+            ]
+         );
+
+         $elementRecord->delete();
+         return true;
+
+      }
+
+   }
+
+   public function check(array $params)
+   {
 
       $user = isset($params['userId']) ? Craft::$app->users->getUserById($params['userId']) : Craft::$app->getUser()->getIdentity();
 
       $elementRecord = ElementsRecord::findOne(
-          [
+         [
             'userId' => $user->id,
             'elementId' => $params['elementId']
-          ]
+         ]
       );
 
       return $elementRecord ? true : false;
@@ -133,79 +193,33 @@ class ElementService extends Component
     public function follow($elementId)
     {
 
-      $user = Craft::$app->getUser()->getIdentity();
-
-      $elementRecord = ElementsRecord::findOne(
-          [
-             'userId' => $user->id,
-             'elementId' => $elementId
-          ]
-      );
-
-      if (!$elementRecord && $user) {
-
-         $elementClass = Craft::$app->getElements()->getElementTypeById($elementId);
-
-         // To stop people following ID's of classes that aren't allowed if they know the ID
-         if (in_array($elementClass, Follow::$plugin->getSettings()->allowedElementClasses))
+         if (Follow::$plugin->getSettings()->userRequests)
          {
-
-            $elementRecord = new ElementsRecord();
-
-            $elementRecord->userId = $user->id;
-            $elementRecord->elementId = $elementId;
-            $elementRecord->elementClass = $elementClass;
-            $elementRecord->siteId = Craft::$app->getSites()->currentSite->id;
-
-            $db = Craft::$app->getDb();
-            $transaction = $db->beginTransaction();
-
-            try {
-
-                $success = $elementRecord->save(false);
-
-                if ($success) {
-                    $transaction->commit();
-                }
-
-            }
-            catch (\Throwable $e) {
-
-                $transaction->rollBack();
-                throw $e;
-
-            }
-
-            return true;
-
+            return Follow::getInstance()->requestService->createRequest($elementId);
          }
 
-      }
+         return $this->createFollow($elementId);
 
-      return false;
-
-    }
+   }
 
    public function unfollow($elementId)
    {
 
-      $user = Craft::$app->getUser()->getIdentity();
+      return $this->deleteFollow($elementId);
 
-      $elementRecord = ElementsRecord::findOne(
-         [
-            'userId' => $user->id,
-            'elementId' => $elementId
-         ]
-      );
+   }
 
-      if ($elementRecord) {
+   public function toggle($elementId)
+   {
 
-          $elementRecord->delete();
-          return true;
-
+      if($this->check(array('elementId' => $elementId)))
+      {
+         $this->createFollow($elementId);
       }
-
-      return false;
+      else 
+      {
+         $this->deleteFollow($elementId);
+      }
 
    }
 
