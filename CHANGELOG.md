@@ -1,5 +1,9 @@
 # Follow Changelog
 
+## 1.0.5 - 2020-07-30
+### Added
+- craft\elements\Entry is now enabled by default for allowedElementClasses
+
 ## 1.0.4 - 2020-06-22
 ### Removed
 - Settings page is no longer available through the CP. Use `config/follow.php` to set settings per environment
