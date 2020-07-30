@@ -18,7 +18,8 @@ class Settings extends Model
     public $allowedElementClasses = array(
       'craft\elements\User',
       'craft\elements\Tag',
-      'craft\elements\Category'
+      'craft\elements\Category',
+      'craft\elements\Entry'
     );
 
     // Public Methods
