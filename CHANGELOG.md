@@ -1,5 +1,10 @@
 # Follow Changelog
 
+## 2.0.0 - 2022-06-17
+### Changed
+- Now requires PHP ^8.0.0.
+- Now requires Craft CMS ^4.0.0
+
 ## 1.0.5 - 2020-07-30
 ### Added
 - craft\elements\Entry is now enabled by default for allowedElementClasses
