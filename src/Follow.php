@@ -26,9 +26,9 @@ class Follow extends Plugin
     // Public Properties
     // =========================================================================
 
-    public $schemaVersion = '1.0.1';
+    public string $schemaVersion = '1.0.1';
 
-    public $hasCpSettings = false;
+    public bool $hasCpSettings = false;
 
     // Public Methods
     // =========================================================================
@@ -68,7 +68,7 @@ class Follow extends Plugin
     // Protected Methods
     // =========================================================================
 
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?\craft\base\Model
     {
         return new Settings();
     }

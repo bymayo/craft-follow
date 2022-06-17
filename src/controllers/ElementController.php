@@ -13,7 +13,7 @@ class ElementController extends Controller
     // Protected Properties
     // =========================================================================
 
-    protected $allowAnonymous = ['follow', 'unfollow'];
+    protected array|int|bool $allowAnonymous = ['follow', 'unfollow'];
 
     // Public Methods
     // =========================================================================
