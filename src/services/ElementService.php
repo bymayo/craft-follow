@@ -141,7 +141,11 @@ class ElementService extends Component
 
             if ($success) {
                $transaction->commit();
+               return true;
             }
+
+            $transaction->rollBack();
+            return false;
 
          }
          catch (\Throwable $e) {
@@ -151,9 +155,9 @@ class ElementService extends Component
 
          }
 
-         return true;
-
       }
+
+      return false;
 
    }
 
@@ -170,10 +174,16 @@ class ElementService extends Component
             ]
          );
 
+         if ($elementRecord === null) {
+            return false;
+         }
+
          $elementRecord->delete();
          return true;
 
       }
+
+      return false;
 
    }
 
@@ -216,11 +226,11 @@ class ElementService extends Component
 
       if($this->check(array('elementId' => $elementId)))
       {
-         $this->createFollow($elementId);
-      }
-      else 
-      {
          $this->deleteFollow($elementId);
+      }
+      else
+      {
+         $this->createFollow($elementId);
       }
 
    }

@@ -10,25 +10,22 @@ use craft\web\Controller;
 class ElementController extends Controller
 {
 
-    // Protected Properties
-    // =========================================================================
-
-    protected array|int|bool $allowAnonymous = ['follow', 'unfollow'];
-
     // Public Methods
     // =========================================================================
 
     public function actionFollow()
     {
 
+      $this->requirePostRequest();
+      $this->requireLogin();
+
       $request = Craft::$app->getRequest();
 
-      $elementId = $request->getParam('elementId');
-      $redirect = $request->getParam('redirect');
+      $elementId = (int) $request->getRequiredBodyParam('elementId');
 
       if (Follow::getInstance()->elementService->follow($elementId))
       {
-         return $this->redirect($redirect ?? Craft::$app->getRequest()->referrer);
+         return $this->redirectToPostedUrl();
       }
 
       return false;
@@ -38,14 +35,16 @@ class ElementController extends Controller
     public function actionUnfollow()
     {
 
+      $this->requirePostRequest();
+      $this->requireLogin();
+
       $request = Craft::$app->getRequest();
 
-      $elementId = $request->getParam('elementId');
-      $redirect = $request->getParam('redirect');
+      $elementId = (int) $request->getRequiredBodyParam('elementId');
 
       if (Follow::getInstance()->elementService->unfollow($elementId))
       {
-         return $this->redirect($redirect ?? Craft::$app->getRequest()->referrer);
+         return $this->redirectToPostedUrl();
       }
 
       return false;

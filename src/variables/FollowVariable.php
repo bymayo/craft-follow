@@ -18,14 +18,14 @@ class FollowVariable
       Elements
    */
 
-   public function followUrl($elementId)
+   public function followUrl()
    {
-      return UrlHelper::actionUrl('follow/element/follow', array('elementId' => $elementId));
+      return UrlHelper::actionUrl('follow/element/follow');
    }
 
-   public function unfollowUrl($elementId)
+   public function unfollowUrl()
    {
-      return UrlHelper::actionUrl('follow/element/unfollow', array('elementId' => $elementId));
+      return UrlHelper::actionUrl('follow/element/unfollow');
    }
 
    public function check($params = null)

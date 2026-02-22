@@ -2,7 +2,6 @@
 
 namespace bymayo\follow;
 
-use bymayo\follow\services\FollowService;
 use bymayo\follow\variables\FollowVariable;
 use bymayo\follow\models\Settings;
 
