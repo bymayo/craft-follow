@@ -30,6 +30,10 @@ class FollowVariable
 
    public function check($params = null)
    {
+      if (is_int($params)) {
+         $params = ['elementId' => $params];
+      }
+
       return Follow::getInstance()->elementService->check($params);
    }
 

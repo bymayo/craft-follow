@@ -1,5 +1,12 @@
 # Follow Changelog
 
+## 5.1.3 - 2026-02-22
+
+### Fixed
+
+- Trashed and deleted elements/users no longer counted in following and followers lists and totals. ([#8](https://github.com/bymayo/craft-follow/issues/8))
+- `check()` now accepts an element ID directly in templates, e.g. `craft.follow.check(entry.id)`. ([#9](https://github.com/bymayo/craft-follow/issues/9))
+
 ## 5.1.2 - 2026-02-22
 
 ### Removed

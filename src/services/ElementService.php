@@ -35,11 +35,13 @@ class ElementService extends Component
       $elementClass = isset($params['elementClass']) ? $params['elementClass'] : 'craft\elements\User';
 
       return (new Query())
-         ->from(['{{%follow_elements}}'])
+         ->from(['f' => '{{%follow_elements}}'])
+         ->innerJoin(['e' => '{{%elements}}'], '[[f.elementId]] = [[e.id]]')
          ->where([
-            'userId' => $user->id,
-            'elementClass' => $elementClass
+            'f.userId' => $user->id,
+            'f.elementClass' => $elementClass
          ])
+         ->andWhere(['e.dateDeleted' => null])
          ->count();
 
    }
@@ -50,10 +52,12 @@ class ElementService extends Component
       $elementId = $elementId ?? Craft::$app->getUser()->getIdentity()->id;
 
       return (new Query())
-         ->from(['{{%follow_elements}}'])
+         ->from(['f' => '{{%follow_elements}}'])
+         ->innerJoin(['e' => '{{%elements}}'], '[[f.userId]] = [[e.id]]')
          ->where([
-            'elementId' => $elementId
+            'f.elementId' => $elementId
          ])
+         ->andWhere(['e.dateDeleted' => null])
          ->count();
 
    }
@@ -66,12 +70,14 @@ class ElementService extends Component
       $output = isset($params['output']) ? $params['output'] : 'string';
 
       $query = (new Query())
-         ->select(['elementId'])
-         ->from(['{{%follow_elements}}'])
+         ->select(['f.elementId'])
+         ->from(['f' => '{{%follow_elements}}'])
+         ->innerJoin(['e' => '{{%elements}}'], '[[f.elementId]] = [[e.id]]')
          ->where([
-            'userId' => $user->id,
-            'elementClass' => $elementClass
-         ]);
+            'f.userId' => $user->id,
+            'f.elementClass' => $elementClass
+         ])
+         ->andWhere(['e.dateDeleted' => null]);
 
       $queryResult = $query->all();
 
@@ -86,11 +92,13 @@ class ElementService extends Component
       $output = isset($output) ? $output: 'string';
 
       $query = (new Query())
-         ->select(['userId'])
-         ->from(['{{%follow_elements}}'])
+         ->select(['f.userId'])
+         ->from(['f' => '{{%follow_elements}}'])
+         ->innerJoin(['e' => '{{%elements}}'], '[[f.userId]] = [[e.id]]')
          ->where([
-            'elementId' => $elementId
-         ]);
+            'f.elementId' => $elementId
+         ])
+         ->andWhere(['e.dateDeleted' => null]);
 
       $queryResult = $query->all();
 
