@@ -28,8 +28,8 @@ class Settings extends Model
     public function rules(): array
     {
         return [
-            [['allowedElementClasses'], 'array'],
-            [['userRequests'], 'bool']
+            [['allowedElementClasses'], 'each', 'rule' => ['string']],
+            [['userRequests'], 'boolean']
         ];
     }
 

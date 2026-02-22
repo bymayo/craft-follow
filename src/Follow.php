@@ -25,7 +25,7 @@ class Follow extends Plugin
     // Public Properties
     // =========================================================================
 
-    public string $schemaVersion = '1.0.1';
+    public string $schemaVersion = '1.0.2';
 
     public bool $hasCpSettings = false;
 

@@ -41,16 +41,31 @@ class ElementService extends Component
    public function followingTotal($params)
    {
 
-      $params['output'] = 'array';
-      return count($this->following($params));
+      $user = isset($params['userId']) ? Craft::$app->users->getUserById($params['userId']) : Craft::$app->getUser()->getIdentity();
+      $elementClass = isset($params['elementClass']) ? $params['elementClass'] : 'craft\elements\User';
+
+      return (new Query())
+         ->from(['{{%follow_elements}}'])
+         ->where([
+            'userId' => $user->id,
+            'elementClass' => $elementClass
+         ])
+         ->count();
 
    }
 
    public function followersTotal($elementId)
    {
 
-      return count($this->followers($elementId, 'array'));
-      
+      $elementId = $elementId ?? Craft::$app->getUser()->getIdentity()->id;
+
+      return (new Query())
+         ->from(['{{%follow_elements}}'])
+         ->where([
+            'elementId' => $elementId
+         ])
+         ->count();
+
    }
 
     public function following($params)
@@ -68,11 +83,9 @@ class ElementService extends Component
             ->where([
                'userId' => $user->id,
                'elementClass' => $elementClass
-            ])
-            ->limit(null);
+            ]);
 
-         $command = $query->createCommand();
-         $queryResult = $command->queryAll();
+         $queryResult = $query->all();
 
          return $output == 'array' ? $queryResult : $this->arrayToString($queryResult, 'elementId');
 
@@ -96,17 +109,9 @@ class ElementService extends Component
             ->from(['{{%follow_elements}}'])
             ->where([
                'elementId' => $elementId
-            ])
-            ->limit(null);
+            ]);
 
-         $command = $query->createCommand();
-         $queryResult = $command->queryAll();
-
-         $results = array();
-
-         foreach ($queryResult as $result) {
-            array_push($results, $result['userId']);
-         }
+         $queryResult = $query->all();
 
          return $output == 'array' ? $queryResult : $this->arrayToString($queryResult, 'userId');
 
@@ -192,14 +197,12 @@ class ElementService extends Component
 
       $user = isset($params['userId']) ? Craft::$app->users->getUserById($params['userId']) : Craft::$app->getUser()->getIdentity();
 
-      $elementRecord = ElementsRecord::findOne(
-         [
+      return ElementsRecord::find()
+         ->where([
             'userId' => $user->id,
             'elementId' => $params['elementId']
-         ]
-      );
-
-      return $elementRecord ? true : false;
+         ])
+         ->exists();
    }
 
     public function follow($elementId)

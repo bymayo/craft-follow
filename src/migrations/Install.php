@@ -65,6 +65,9 @@ class Install extends Migration
 
     protected function createIndexes()
     {
+        $this->createIndex(null, '{{%follow_elements}}', ['userId', 'elementId'], true);
+        $this->createIndex(null, '{{%follow_elements}}', ['elementId']);
+        $this->createIndex(null, '{{%follow_elements}}', ['userId', 'elementClass']);
     }
 
     protected function addForeignKeys()

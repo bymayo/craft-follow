@@ -1,5 +1,17 @@
 # Follow Changelog
 
+## 5.1.1 - 2026-02-22
+
+### Fixed
+
+- Follow requests service not accepting element IDs.
+- Query performance for totals, checks, following and followers.
+- Settings validation rules.
+
+### Added
+
+- Database indexes on the `follow_elements` table.
+
 ## 5.1.0 - 2026-02-22 [CRITICAL]
 
 ### Fixed
