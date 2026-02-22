@@ -5,7 +5,6 @@ namespace bymayo\follow\migrations;
 use bymayo\follow\Follow;
 
 use Craft;
-use craft\config\DbConfig;
 use craft\db\Migration;
 
 class Install extends Migration
@@ -20,7 +19,6 @@ class Install extends Migration
         if ($this->createTables()) {
             $this->createIndexes();
             $this->addForeignKeys();
-            // Craft::$app->db->schema->refresh();
             $this->insertDefaultData();
         }
 

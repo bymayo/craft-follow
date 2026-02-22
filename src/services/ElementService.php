@@ -7,10 +7,7 @@ use bymayo\follow\records\ElementsRecord;
 
 use Craft;
 use craft\base\Component;
-use craft\services\Elements;
 use craft\db\Query;
-
-use Exception;
 
 class ElementService extends Component
 {
@@ -29,13 +26,6 @@ class ElementService extends Component
 
       return implode(',', $results);
 
-   }
-
-   public function outputType($type)
-   {
-      // @TODO: Allow the output to be string, array, user, categories, entries. 
-      // This would mean we wouldn't need the followingTotal and followerTotal as 
-      // |length could be used
    }
 
    public function followingTotal($params)
@@ -75,24 +65,17 @@ class ElementService extends Component
       $elementClass = isset($params['elementClass']) ? $params['elementClass'] : 'craft\elements\User';
       $output = isset($params['output']) ? $params['output'] : 'string';
 
-      try {
+      $query = (new Query())
+         ->select(['elementId'])
+         ->from(['{{%follow_elements}}'])
+         ->where([
+            'userId' => $user->id,
+            'elementClass' => $elementClass
+         ]);
 
-         $query = (new Query())
-            ->select(['elementId'])
-            ->from(['{{%follow_elements}}'])
-            ->where([
-               'userId' => $user->id,
-               'elementClass' => $elementClass
-            ]);
+      $queryResult = $query->all();
 
-         $queryResult = $query->all();
-
-         return $output == 'array' ? $queryResult : $this->arrayToString($queryResult, 'elementId');
-
-      }
-      catch (Exception $e) {
-         throw $e;
-      }
+      return $output == 'array' ? $queryResult : $this->arrayToString($queryResult, 'elementId');
 
    }
 
@@ -102,23 +85,16 @@ class ElementService extends Component
       $elementId = $elementId ?? Craft::$app->getUser()->getIdentity()->id;
       $output = isset($output) ? $output: 'string';
 
-      try {
+      $query = (new Query())
+         ->select(['userId'])
+         ->from(['{{%follow_elements}}'])
+         ->where([
+            'elementId' => $elementId
+         ]);
 
-         $query = (new Query())
-            ->select(['userId'])
-            ->from(['{{%follow_elements}}'])
-            ->where([
-               'elementId' => $elementId
-            ]);
+      $queryResult = $query->all();
 
-         $queryResult = $query->all();
-
-         return $output == 'array' ? $queryResult : $this->arrayToString($queryResult, 'userId');
-
-      }
-      catch (Exception $e) {
-         throw $e;
-      }
+      return $output == 'array' ? $queryResult : $this->arrayToString($queryResult, 'userId');
 
    }
 

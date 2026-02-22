@@ -1,5 +1,11 @@
 # Follow Changelog
 
+## 5.1.2 - 2026-02-22
+
+### Removed
+
+- Unused imports and dead code across plugin files.
+
 ## 5.1.1 - 2026-02-22
 
 ### Fixed

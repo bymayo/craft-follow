@@ -4,7 +4,6 @@ namespace bymayo\follow\records;
 
 use bymayo\follow\Follow;
 
-use Craft;
 use craft\db\ActiveRecord;
 
 class ElementsRecord extends ActiveRecord
