@@ -3,6 +3,7 @@
 namespace bymayo\follow\services;
 
 use bymayo\follow\Follow;
+use bymayo\follow\events\FollowEvent;
 use bymayo\follow\records\ElementsRecord;
 
 use Craft;
@@ -11,6 +12,13 @@ use craft\db\Query;
 
 class ElementService extends Component
 {
+
+    // Constants
+    // =========================================================================
+
+    const EVENT_AFTER_FOLLOW = 'afterFollow';
+
+    const EVENT_AFTER_UNFOLLOW = 'afterUnfollow';
 
     // Public Methods
     // =========================================================================
@@ -130,6 +138,15 @@ class ElementService extends Component
 
             if ($success) {
                $transaction->commit();
+
+               if ($this->hasEventHandlers(self::EVENT_AFTER_FOLLOW)) {
+                  $this->trigger(self::EVENT_AFTER_FOLLOW, new FollowEvent([
+                     'userId' => $elementRecord->userId,
+                     'elementId' => $elementRecord->elementId,
+                     'elementClass' => $elementRecord->elementClass,
+                  ]));
+               }
+
                return true;
             }
 
@@ -167,7 +184,20 @@ class ElementService extends Component
             return false;
          }
 
+         $userId = $elementRecord->userId;
+         $unfollowedElementId = $elementRecord->elementId;
+         $elementClass = $elementRecord->elementClass;
+
          $elementRecord->delete();
+
+         if ($this->hasEventHandlers(self::EVENT_AFTER_UNFOLLOW)) {
+            $this->trigger(self::EVENT_AFTER_UNFOLLOW, new FollowEvent([
+               'userId' => $userId,
+               'elementId' => $unfollowedElementId,
+               'elementClass' => $elementClass,
+            ]));
+         }
+
          return true;
 
       }

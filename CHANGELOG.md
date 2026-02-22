@@ -1,5 +1,11 @@
 # Follow Changelog
 
+## 5.1.4 - 2026-02-22
+
+### Added
+
+- `EVENT_AFTER_FOLLOW` and `EVENT_AFTER_UNFOLLOW` events on `ElementService` for custom integrations like notifications. ([#11](https://github.com/bymayo/craft-follow/issues/11))
+
 ## 5.1.3 - 2026-02-22
 
 ### Fixed
